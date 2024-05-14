@@ -23,9 +23,9 @@ local function removeFizzType(self, priority)
   end
 end
 
-local function makeDefaultFizzes()
+local function makeDefaultFizzes(x)
   local default = {}
-  for t = 1, 100 do
+  for t = 1, x do
     default[t] = function(ind, str)
       return str
     end
@@ -48,9 +48,11 @@ function mt.__index(obj, ind)
   return nil
 end
 
-function fizzbuzzer.new()
+function fizzbuzzer.new(fizzes)
+  fizzes = fizzes or 10
+
   local buzzer = {}
-  buzzer._fizzes = makeDefaultFizzes()
+  buzzer._fizzes = makeDefaultFizzes(fizzes)
   buzzer.addFizzType = addFizzType
   buzzer.removeFizzType = removeFizzType
   
