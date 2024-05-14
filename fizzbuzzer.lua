@@ -1,5 +1,9 @@
 local fizzbuzzer = {}
 
+local function selfReturn(ind, str)
+  return str
+end
+
 local function addFizzType(self, phrase, mod, priority, nonFirstPhrase)
   nonFirstPhrase = nonFirstPhrase or phrase
   priority = priority or 1
@@ -18,17 +22,13 @@ local function addFizzType(self, phrase, mod, priority, nonFirstPhrase)
 end
 
 local function removeFizzType(self, priority)
-  self._fizzes[priority] = function(ind, str)
-    return str
-  end
+  self._fizzes[priority] = selfReturn
 end
 
 local function makeDefaultFizzes(x)
   local default = {}
   for t = 1, x do
-    default[t] = function(ind, str)
-      return str
-    end
+    default[t] = selfReturn
   end
   return default
 end
